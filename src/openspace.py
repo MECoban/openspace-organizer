@@ -24,8 +24,8 @@ class OpenSpace:
 
     def display(self):
         for table_index, table in enumerate(self.tables, start=1):
-            print(f"Table {table_index} Capacity is {table.capacity}")
-            for seat_index, seat in enumerate(table.seats, start=1):
+            print(f"Table {table_index} Capacity is {Table.capacity}")
+            for seat_index, seat in enumerate(Table.seats, start=1):
                 if seat.free == False:
                     print(f"{seat.occupant} seating on the Seat {table_index} ")
                 #else:
@@ -33,6 +33,17 @@ class OpenSpace:
 
     def store(self,filename):
         self.filename = filename
+        filename = "/Users/mehmet/Desktop/openspace-organizer/openspace-organizer-1/colleagues.txt"
+        with open(filename, "w") as output_filename:
+            for table_index, Table in enumerate(self.tables):
+                for seat_index, seat in enumerate(Table.seats):
+                    if seat.free == False:
+                        output_filename.write(f"{Seat.occupant} sitting on Table {table_index}, Seat{seat_index} ")
+                    else:
+                        output_filename.write(f"Table{table_index}, Seat{seat_index} is Free ")
+
+
+
         
 
 
