@@ -3,18 +3,35 @@ class Seat:
        self.free = free
        self.occupant = occupant
 
+    def set_occupant(self, name):
 
-    def set_occupant(self, name): # bool
+        """
+        set_occupant method is for occupie a person to a seat. Method checks seat is empty or not.
+        If seat empty then occupies a person to a seat and displays "person has occupied the seat."
+          If seat is not empty then display that: "Seat is already occupied"
+
+        Args:
+            name (str): A string value with the name of the person to be seated.
+        """
         self.name = name
         if self.free == True: #checks if seat free
             self.occupant = name
             self.free = False # returns False because seat is not free anymore
-            print(f"{self.occupant} has occupied the seat")
+            print(f"{self.occupant} has occupied the seat.")
         else: 
-            print("Seat is already occupied")        
+            print("Seat is already occupied.")        
             
         
     def remove_occupant(self, prv_name):
+       
+       """
+       remove_occupant method will check the seat has been assigned a person as occupant
+       or not. If seat is occupied by person then revoves it. If seat is not occupied by person then
+       displays:"seat is empty"
+
+       Args:
+            prv_name (str): A string value with the name of the person was seated.
+        """
        self.prv_name = prv_name
        if self.free == False: # cheks if seat already occupied
            self.prv_name = self.occupant
@@ -26,7 +43,7 @@ class Seat:
        
            
 
-class Table():
+class Table:
     def __init__(self, seats, capacity = 4):
         self.capacity = capacity
         self.seats = [] # create empty list
@@ -34,14 +51,28 @@ class Table():
             new_seat = Seat()
             self.seats.append(new_seat)
         
-
+    
     def has_free_spot(self):
+        
+        """
+        has_free_spot method checks if there is any free seat. If there is any free seat then
+        displays "There is an available seat"
+        """
+        
         for seat in self.seats:
             if seat.free == True: #self.free not working we need to use seat.free because free is Seat's attribute
                 return "There is an available seat"    
 
         
     def assign_seat(self, name):
+
+        """
+        assign_seat method checks if seat is free. If seat is free then via set_occupant method
+        sets a person as an occupant.
+        Args:
+                name (str): A string value with the name of the person to be seated.
+        """
+
         for seat in self.seats:
             if seat.free == True:
                 seat.set_occupant(name)
@@ -49,6 +80,11 @@ class Table():
 
 
     def capacity_left(self):
+
+        """
+        capacity_left method checks for free seats and returns total free seats in the table
+        """
+
         free_seats = 4
         for seat in self.seats:
             if seat.free == False:
